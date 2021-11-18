@@ -5,7 +5,7 @@ from conans import ConanFile
 
 class UraniumConan(ConanFile):
     name = "uranium"
-    version = "4.13.0-alpha+001"
+    version = "4.13.0"
     license = "LGPL-3.0"
     author = "Ultimaker B.V."
     url = "https://github.com/Ultimaker/uranium"
@@ -17,6 +17,8 @@ class UraniumConan(ConanFile):
     default_user = "ultimaker"
     default_channel = "testing"
     exports = "LICENSE*"
+    python_requires = ["UltimakerBase/0.1@ultimaker/testing"]
+    python_requires_extend = "UltimakerBase.UltimakerBase"
     scm = {
         "type": "git",
         "subfolder": ".",
