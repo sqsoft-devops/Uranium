@@ -5,7 +5,7 @@ from conans import ConanFile
 
 class UraniumConan(ConanFile):
     name = "uranium"
-    version = "4.13.0"
+    version = "5.0.0"
     license = "LGPL-3.0"
     author = "Ultimaker B.V."
     url = "https://github.com/Ultimaker/uranium"
@@ -28,7 +28,7 @@ class UraniumConan(ConanFile):
 
     def requirements(self):
         self.requires(f"Python/3.8.10@python/stable")
-        self.requires(f"arcus/4.13.0-alpha+001@ultimaker/testing")
+        self.requires(f"arcus/5.0.0@ultimaker/testing")
 
     def package(self):
         self.copy("*", src = os.path.join(self.source_folder, "plugins"), dst = os.path.join("site-packages", "plugins"))
