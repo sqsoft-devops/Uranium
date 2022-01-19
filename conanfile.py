@@ -27,7 +27,7 @@ class UraniumConan(ConanFile):
     }
 
     def requirements(self):
-        self.requires(f"python/3.10.0@python/stable")
+        self.requires(f"python/3.10.2@python/stable")
         self.requires(f"arcus/[~=5.0.0-a]@ultimaker/testing")
 
     def package(self):
