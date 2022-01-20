@@ -19,6 +19,14 @@ class UraniumConan(ConanFile):
     exports = "LICENSE*"
     python_requires = ["UltimakerBase/0.1@ultimaker/testing"]
     python_requires_extend = "UltimakerBase.UltimakerBase"
+    options = {
+        "testing": [True, False],
+        "devtools": [True, False]
+    }
+    default_options = {
+        "testing": False,
+        "devtools": False
+    }
     scm = {
         "type": "git",
         "subfolder": ".",
@@ -28,7 +36,20 @@ class UraniumConan(ConanFile):
 
     def requirements(self):
         self.requires(f"python/3.10.2@python/stable")
+        self.requires(f"pyqt5/5.15.6@python/stable")
         self.requires(f"arcus/[~=5.0.0-a]@ultimaker/testing")
+        self.requires(f"scipy/1.8.0rc2@python/stable")
+        self.requires(f"numpy/1.21.5@python/stable")
+        self.requires(f"numpy-stl/2.10.1@python/stable")
+        self.requires(f"cryptography/3.4.8@python/stable")
+        self.requires(f"pyclipper/1.3.0.post2@python/stable")
+        if self.options.testing:
+            self.requires(f"pytest/5.2.1@python/stable")
+            self.requires(f"twisted/21.2.0@python/stable")
+            self.requires(f"zope_interface/5.4.0@python/stable")
+        if self.options.devtools:
+            self.requires(f"mypy/0.740@python/stable")
+            self.requires(f"colorlog/6.6.0@python/stable")
 
     def package(self):
         self.copy("*", src = os.path.join(self.source_folder, "plugins"), dst = os.path.join("site-packages", "plugins"))
