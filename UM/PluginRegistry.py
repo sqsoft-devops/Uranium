@@ -488,10 +488,10 @@ class PluginRegistry(QObject):
                             metadata = {}
                     plugin_object.setMetaData(metadata)
                     self._addPluginObject(plugin_object, plugin_id, plugin_type)
-
+            plugin_version = self._metadata[plugin_id].get("plugin", {}).get("version")
             self._plugins[plugin_id] = plugin
             self.enablePlugin(plugin_id)
-            Logger.info("Loaded plugin %s", plugin_id)
+            Logger.info(f"Loaded plugin {plugin_id} {plugin_version}")
 
         except Exception:
             self.removeCorruptedPluginMessage(plugin_id)
@@ -529,6 +529,7 @@ class PluginRegistry(QObject):
     #   Uninstall a plugin with a given ID:
     @pyqtSlot(str, result = "QVariantMap")
     def uninstallPlugin(self, plugin_id: str) -> Dict[str, str]:
+        message_text = ""
         if plugin_id in self._plugins_to_install:
             del self._plugins_to_install[plugin_id]
             self._savePluginData()

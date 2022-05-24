@@ -123,6 +123,7 @@ class UpdateChecker(Extension):
                                          "info/latest_update_version_shown")
             else:
                 # Beta version is the highest, check for that
+                local_version = local_version.getWithoutPostfix()  # Since we can't specify postfix in the latest.json.
                 if download_url is not None:
                     self._download_url = beta_download_url
                 self._handleLatestUpdate(local_version, newest_beta_version, silent, display_same_version,
